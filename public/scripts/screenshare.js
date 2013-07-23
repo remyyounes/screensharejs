@@ -16,7 +16,7 @@ $(function(){
     };
 
     Camera.prototype.loadMediaStream = function(stream) {
-        console.log('!!');
+        console.log('loadMediaStream');
         var video = document.querySelector("video");
         video.src = window.URL.createObjectURL(stream);
     };
