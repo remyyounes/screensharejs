@@ -17,31 +17,14 @@ app.get('/capture', function(request, response){
 });
 
 var port = process.env.PORT || 5000;
-// app.listen(port, function() {
-//   console.log("Listening on " + port);
-// });
-
-
-
 
 var crypto = require('crypto'),
       https = require("https");
 
 var privateKey = fs.readFileSync('privatekey.pem').toString();
 var certificate = fs.readFileSync('certificate.pem').toString();
+var options = {key: privateKey, cert: certificate};
 
-var credentials = function(){
-	return crypto.createCredentials({key: privateKey, cert: certificate});
-};
-
-var handler = function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-};
-
-// var port = process.env.PORT || 5000;
-var server = https.createServer(credentials);
-// server.setSecure(credentials);
-server.addListener("request", handler);
+var server = https.createServer(options, app);
 server.listen(port);
 console.log("Listening on port " + port);
