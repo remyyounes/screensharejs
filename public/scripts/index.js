@@ -6,7 +6,7 @@ $(function(){
 	var Camera = function(){
 		if (hasGetUserMedia()){
 			// good to go
-			navigator.webkitGetUserMedia({ "audio" : true },
+			navigator.webkitGetUserMedia({ "screen" : true },
 				this.loadMediaStream,
 				this.onUserMediaFail);
 		} else {
@@ -15,12 +15,9 @@ $(function(){
 	};
 
 	Camera.prototype.loadMediaStream = function(stream) {
-		var audio = document.querySelector("audio");
-		audio.src = window.URL.createObjectURL(stream);
-
-		audio.onloadedmetadata = function(e){
-			// start streaming of audio to server here?
-		};
+		console.log('!!');
+		var video = document.querySelector("video");
+		video.src = window.URL.createObjectURL(stream);
 	};
 
 	Camera.prototype.onUserMediaFail = function(){
@@ -28,4 +25,5 @@ $(function(){
 	};
 
 	var cam  = new Camera();
+	console.log('test2');
 }());
